@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt — Krasopis</title>
+  <meta name="description" content="Kontaktujte mě pro nezávaznou nabídku kaligrafických služeb.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Krasopis</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Domů</a></li>
+        <li><a href="sluzby.html">Služby</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="o-mne.html">O mně</a></li>
+        <li><a href="kontakt.html" class="active">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <p class="script-title">Kontakt</p>
+      <h1>Ozvěte se mi</h1>
+    </div>
+  </header>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+        <div class="contact-info fade-in">
+          <h3>Pojďme si popovídat</h3>
+          <p>Máte zájem o kaligrafii pro vaši svatbu, oslavu nebo jinou příležitost? Napište mi a společně vymyslíme něco krásného. Odpovídám obvykle do 24 hodin.</p>
+
+          <div class="contact-detail">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="2" y="4" width="16" height="12" rx="1"/>
+              <path d="M2 6 L10 12 L18 6" stroke-linecap="round"/>
+            </svg>
+            <span>info@krasopis.cz</span>
+          </div>
+          <div class="contact-detail">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M3 4 L7 4 L9 8 L7 10 Q9 14 11 13 Q13 12 14 11 L16 13 L16 17 Q8 18 3 4Z" stroke-linecap="round"/>
+            </svg>
+            <span>+420 000 000 000</span>
+          </div>
+          <div class="contact-detail">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="3" y="3" width="14" height="14" rx="3"/>
+              <circle cx="10" cy="10" r="4"/>
+              <circle cx="14.5" cy="5.5" r="1" fill="currentColor"/>
+            </svg>
+            <span>@krasopis</span>
+          </div>
+
+          <div style="margin-top:2rem;">
+            <div class="botanical-divider" style="justify-content:flex-start;">
+              <svg width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="0.8" style="color:var(--color-accent-light);">
+                <path d="M5 35 Q10 20 20 15 Q30 10 40 12 Q50 14 55 8" stroke-linecap="round"/>
+                <ellipse cx="20" cy="13" rx="4" ry="7" transform="rotate(-20 20 13)"/>
+                <ellipse cx="35" cy="10" rx="3" ry="6" transform="rotate(10 35 10)"/>
+                <ellipse cx="50" cy="8" rx="3" ry="5" transform="rotate(30 50 8)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Jméno</label>
+            <input type="text" id="name" name="name" required placeholder="Vaše jméno">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="vas@email.cz">
+          </div>
+          <div class="form-group">
+            <label for="service">Typ služby</label>
+            <select id="service" name="service">
+              <option value="">Vyberte službu...</option>
+              <option value="pozvanky">Svatební pozvánky</option>
+              <option value="jmenovky">Jmenovky</option>
+              <option value="obalky">Adresování obálek</option>
+              <option value="citaty">Citáty a věnování</option>
+              <option value="diplomy">Diplomy a certifikáty</option>
+              <option value="menu">Menu a programy</option>
+              <option value="jine">Jiné</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Zpráva</label>
+            <textarea id="message" name="message" required placeholder="Popište vaše přání — počet kusů, termín, styl..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-filled" style="border:none;cursor:pointer;">Odeslat poptávku</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">Krasopis</p>
+          <p>Ruční kaligrafie pro vaše výjimečné okamžiky. Každé slovo psáno s láskou.</p>
+        </div>
+        <div>
+          <h4>Navigace</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="sluzby.html">Služby</a></li>
+            <li><a href="galerie.html">Galerie</a></li>
+            <li><a href="o-mne.html">O mně</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:info@krasopis.cz">info@krasopis.cz</a></li>
+            <li><a href="tel:+420000000000">+420 000 000 000</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Krasopis. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+    const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Odesláno!';
+      btn.style.background = 'var(--color-gold)';
+      btn.style.borderColor = 'var(--color-gold)';
+      setTimeout(() => {
+        btn.textContent = 'Odeslat poptávku';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
