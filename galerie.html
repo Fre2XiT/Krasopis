@@ -40,53 +40,8 @@
       <div class="section-header fade-in">
         <p>Každý projekt je jedinečný příběh. Zde najdete ukázky toho, co jsem vytvořila pro své klienty.</p>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="6" y="8" width="36" height="32" rx="1"/>
-            <path d="M6 16 L24 28 L42 16" stroke-linecap="round"/>
-          </svg>
-          <span>Svatební pozvánky</span>
-        </div>
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="10" y="6" width="28" height="16" rx="1"/>
-            <path d="M16 14 L32 14" stroke-linecap="round"/>
-          </svg>
-          <span>Jmenovky</span>
-        </div>
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="4" y="10" width="40" height="28" rx="1"/>
-            <path d="M4 18 L24 30 L44 18" stroke-linecap="round"/>
-          </svg>
-          <span>Obálky</span>
-        </div>
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="8" y="4" width="32" height="40" rx="1"/>
-            <path d="M16 16 L32 16" stroke-linecap="round" stroke-width="0.8"/>
-            <path d="M16 22 L28 22" stroke-linecap="round" stroke-width="0.8"/>
-          </svg>
-          <span>Citáty a věnování</span>
-        </div>
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <circle cx="24" cy="24" r="18"/>
-            <path d="M16 22 L32 22" stroke-linecap="round" stroke-width="0.8"/>
-            <path d="M18 28 L30 28" stroke-linecap="round" stroke-width="0.8"/>
-          </svg>
-          <span>Diplomy</span>
-        </div>
-        <div class="gallery-placeholder fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <path d="M8 40 L8 12 Q8 8 12 8 L36 8 Q40 8 40 12 L40 40" stroke-linecap="round"/>
-            <path d="M8 40 L40 40" stroke-linecap="round"/>
-          </svg>
-          <span>Menu a programy</span>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:4rem;" class="fade-in">
+      <div class="gallery-grid" id="gallery-grid"></div>
+      <div id="gallery-empty" style="text-align:center;margin-top:4rem;display:none;" class="fade-in">
         <div class="botanical-divider" style="margin-bottom:2rem;">
           <span class="line"></span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--color-accent-light);">
@@ -123,7 +78,7 @@
         </div>
         <div>
           <h4>Kontakt</h4>
-          <ul class="footer-links">
+          <ul class="footer-links" id="footer-contact">
             <li><a href="mailto:info@krasopis.cz">info@krasopis.cz</a></li>
             <li><a href="tel:+420000000000">+420 000 000 000</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
@@ -141,7 +96,31 @@
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
     document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
     const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    fetch('/api/gallery').then(r => r.json()).then(items => {
+      const grid = document.getElementById('gallery-grid');
+      const empty = document.getElementById('gallery-empty');
+      if (items.length === 0) {
+        empty.style.display = 'block';
+        observer.observe(empty);
+        return;
+      }
+      grid.innerHTML = items.map(item => `
+        <div class="gallery-item fade-in">
+          <img src="${item.image}" alt="${item.title || ''}" loading="lazy">
+        </div>
+      `).join('');
+      grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+
+    fetch('/api/settings').then(r => r.json()).then(s => {
+      const c = document.getElementById('footer-contact');
+      if (c) c.innerHTML = `
+        <li><a href="mailto:${s.email}">${s.email}</a></li>
+        <li><a href="tel:${s.phone.replace(/\s/g,'')}">${s.phone}</a></li>
+        <li><a href="${s.instagramUrl}" target="_blank" rel="noopener">Instagram</a></li>
+      `;
+    });
   </script>
 
 </body>

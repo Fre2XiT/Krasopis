@@ -86,41 +86,7 @@
         <h2>Služby</h2>
         <p>Každý projekt je unikátní — ať se jedná o intimní svatební obřad nebo velkou oslavu, věnuji mu stejnou péči a pozornost.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="6" y="8" width="36" height="32" rx="1"/>
-            <path d="M6 16 L24 28 L42 16" stroke-linecap="round"/>
-            <path d="M18 12 Q24 4 30 12" stroke-linecap="round" stroke-width="0.8"/>
-          </svg>
-          <h3>Svatební pozvánky</h3>
-          <p>Elegantní ručně psané pozvánky, které nastaví tón celé vaší svatby. Každý kus je originál.</p>
-          <span class="price">od 45 Kč / ks</span>
-        </div>
-        <div class="service-card fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="10" y="6" width="28" height="16" rx="1"/>
-            <path d="M16 14 L24 14" stroke-linecap="round"/>
-            <path d="M10 26 L38 26 L38 42 L10 42 Z" stroke-width="0.8" stroke-dasharray="3 2"/>
-            <path d="M18 34 L30 34" stroke-linecap="round" stroke-width="0.8"/>
-          </svg>
-          <h3>Jmenovky</h3>
-          <p>Krásné jmenovky ke stolu, které dodají vaší hostině osobní a elegantní nádech.</p>
-          <span class="price">od 25 Kč / ks</span>
-        </div>
-        <div class="service-card fade-in">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="8" y="4" width="32" height="40" rx="1"/>
-            <path d="M16 16 L32 16" stroke-linecap="round" stroke-width="0.8"/>
-            <path d="M16 22 L28 22" stroke-linecap="round" stroke-width="0.8"/>
-            <path d="M16 28 L30 28" stroke-linecap="round" stroke-width="0.8"/>
-            <path d="M20 36 Q24 32 28 36" stroke-linecap="round" stroke-width="0.8"/>
-          </svg>
-          <h3>Citáty a texty</h3>
-          <p>Kaligraficky ztvárněné citáty, básně nebo věnování — ideální dárek nebo dekorace.</p>
-          <span class="price">od 250 Kč</span>
-        </div>
-      </div>
+      <div class="services-grid" id="services-grid"></div>
       <div style="text-align:center;margin-top:3rem;" class="fade-in">
         <a href="sluzby.html" class="btn">Všechny služby</a>
       </div>
@@ -186,7 +152,7 @@
         </div>
         <div>
           <h4>Kontakt</h4>
-          <ul class="footer-links">
+          <ul class="footer-links" id="footer-contact">
             <li><a href="mailto:info@krasopis.cz">info@krasopis.cz</a></li>
             <li><a href="tel:+420000000000">+420 000 000 000</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
@@ -217,6 +183,39 @@
     }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const serviceIcons = {
+      envelope: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="6" y="8" width="36" height="32" rx="1"/><path d="M6 16 L24 28 L42 16" stroke-linecap="round"/><path d="M18 12 Q24 4 30 12" stroke-linecap="round" stroke-width="0.8"/></svg>',
+      card: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="10" y="6" width="28" height="16" rx="1"/><path d="M16 14 L24 14" stroke-linecap="round"/><path d="M10 26 L38 26 L38 42 L10 42 Z" stroke-width="0.8" stroke-dasharray="3 2"/><path d="M18 34 L30 34" stroke-linecap="round" stroke-width="0.8"/></svg>',
+      mail: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="10" width="40" height="28" rx="1"/><path d="M4 18 L24 30 L44 18" stroke-linecap="round"/></svg>',
+      quote: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="4" width="32" height="40" rx="1"/><path d="M16 16 L32 16" stroke-linecap="round" stroke-width="0.8"/><path d="M16 22 L28 22" stroke-linecap="round" stroke-width="0.8"/><path d="M16 28 L30 28" stroke-linecap="round" stroke-width="0.8"/><path d="M20 36 Q24 32 28 36" stroke-linecap="round" stroke-width="0.8"/></svg>',
+      diploma: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="24" r="18"/><path d="M16 20 Q20 12 24 16 Q28 20 32 14" stroke-linecap="round" stroke-width="0.8"/><path d="M14 30 L34 30" stroke-linecap="round" stroke-width="0.8"/><path d="M18 34 L30 34" stroke-linecap="round" stroke-width="0.8"/></svg>',
+      menu: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 40 L8 12 Q8 8 12 8 L36 8 Q40 8 40 12 L40 40" stroke-linecap="round"/><path d="M8 40 L40 40" stroke-linecap="round"/><path d="M16 18 L32 18" stroke-linecap="round" stroke-width="0.8"/><path d="M16 24 L28 24" stroke-linecap="round" stroke-width="0.8"/><path d="M16 30 L24 30" stroke-linecap="round" stroke-width="0.8"/></svg>'
+    };
+    const defaultIcon = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="4" width="32" height="40" rx="1"/><path d="M16 16 L32 16" stroke-linecap="round" stroke-width="0.8"/><path d="M16 22 L28 22" stroke-linecap="round" stroke-width="0.8"/></svg>';
+
+    fetch('/api/services').then(r => r.json()).then(services => {
+      const grid = document.getElementById('services-grid');
+      const preview = services.slice(0, 3);
+      grid.innerHTML = preview.map(s => `
+        <div class="service-card fade-in">
+          ${serviceIcons[s.icon] || defaultIcon}
+          <h3>${s.title}</h3>
+          <p>${s.description}</p>
+          <span class="price">${s.price}</span>
+        </div>
+      `).join('');
+      grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+
+    fetch('/api/settings').then(r => r.json()).then(s => {
+      const c = document.getElementById('footer-contact');
+      if (c) c.innerHTML = `
+        <li><a href="mailto:${s.email}">${s.email}</a></li>
+        <li><a href="tel:${s.phone.replace(/\s/g,'')}">${s.phone}</a></li>
+        <li><a href="${s.instagramUrl}" target="_blank" rel="noopener">Instagram</a></li>
+      `;
+    });
   </script>
 
 </body>
