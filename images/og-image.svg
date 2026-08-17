@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#FDFBF7"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#E8E0D4" stroke-width="1"/>
+  <text x="600" y="260" text-anchor="middle" font-family="serif" font-size="72" fill="#2C2C2C">Krasopis</text>
+  <text x="600" y="330" text-anchor="middle" font-family="sans-serif" font-size="24" letter-spacing="6" fill="#7D8B6E">KALIGRAFICKÉ SLUŽBY</text>
+  <line x1="480" y1="370" x2="720" y2="370" stroke="#C4A882" stroke-width="1"/>
+  <text x="600" y="420" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#6B6560">Ruční kaligrafie pro vaše výjimečné okamžiky</text>
+  <path d="M560 460 Q580 440 600 450 Q620 440 640 460" fill="none" stroke="#7D8B6E" stroke-width="1.5" stroke-linecap="round"/>
+  <ellipse cx="575" cy="445" rx="8" ry="12" transform="rotate(-20 575 445)" fill="none" stroke="#7D8B6E" stroke-width="0.8"/>
+  <ellipse cx="625" cy="445" rx="8" ry="12" transform="rotate(20 625 445)" fill="none" stroke="#7D8B6E" stroke-width="0.8"/>
+</svg>

@@ -2,5 +2,7 @@
   "email": "info@krasopis.cz",
   "phone": "+420 000 000 000",
   "instagram": "@krasopis",
-  "instagramUrl": "https://instagram.com"
+  "instagramUrl": "https://instagram.com",
+  "contactEmail": "info@krasopis.cz",
+  "analyticsId": ""
 }

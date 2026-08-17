@@ -5,29 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galerie — Krasopis</title>
   <meta name="description" content="Galerie kaligrafických prací — svatební pozvánky, jmenovky, obálky a další.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:title" content="Galerie — Krasopis">
+  <meta property="og:description" content="Galerie kaligrafických prací — svatební pozvánky, jmenovky, obálky a další.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/og-image.png">
+  <meta property="og:locale" content="cs_CZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Galerie — Krasopis">
+  <meta name="twitter:description" content="Galerie kaligrafických prací — svatební pozvánky, jmenovky, obálky a další.">
+  <meta name="twitter:image" content="/images/og-image.png">
+  <link rel="canonical" href="/galerie">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Přeskočit na obsah</a>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Krasopis</a>
+      <a href="/" class="nav-logo">Krasopis</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Domů</a></li>
-        <li><a href="sluzby.html">Služby</a></li>
-        <li><a href="galerie.html" class="active">Galerie</a></li>
-        <li><a href="o-mne.html">O mně</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="/">Domů</a></li>
+        <li><a href="/sluzby">Služby</a></li>
+        <li><a href="/galerie" class="active">Galerie</a></li>
+        <li><a href="/o-mne">O mně</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Page Header -->
-  <header class="page-header">
+  <header class="page-header" id="main">
     <div class="container">
       <p class="script-title">Galerie</p>
       <h1>Ukázky mé práce</h1>
@@ -53,7 +66,7 @@
           <span class="line"></span>
         </div>
         <p style="color:var(--color-text-light);font-size:0.95rem;max-width:450px;margin:0 auto 2rem;">Brzy zde najdete fotografie hotových prací. Mezitím mě neváhejte kontaktovat pro ukázky.</p>
-        <a href="kontakt.html" class="btn">Kontaktujte mě</a>
+        <a href="/kontakt" class="btn">Kontaktujte mě</a>
       </div>
     </div>
   </section>
@@ -69,11 +82,11 @@
         <div>
           <h4>Navigace</h4>
           <ul class="footer-links">
-            <li><a href="index.html">Domů</a></li>
-            <li><a href="sluzby.html">Služby</a></li>
-            <li><a href="galerie.html">Galerie</a></li>
-            <li><a href="o-mne.html">O mně</a></li>
-            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/sluzby">Služby</a></li>
+            <li><a href="/galerie">Galerie</a></li>
+            <li><a href="/o-mne">O mně</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
           </ul>
         </div>
         <div>
@@ -122,6 +135,7 @@
       `;
     });
   </script>
+  <script src="js/cookies.js"></script>
 
 </body>
 </html>

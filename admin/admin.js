@@ -56,7 +56,7 @@ function logout() {
 async function showAdmin() {
   document.getElementById('login-screen').style.display = 'none';
   document.querySelector('.admin-layout').style.display = 'block';
-  switchTab('gallery');
+  switchTab('messages');
 }
 
 async function checkSession() {
@@ -72,10 +72,50 @@ async function checkSession() {
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  if (name === 'messages') loadMessages();
   if (name === 'gallery') loadGallery();
   if (name === 'services') loadServices();
   if (name === 'reviews') loadReviews();
   if (name === 'settings') loadSettings();
+}
+
+// ========== MESSAGES ==========
+
+async function loadMessages() {
+  const res = await api('/api/messages');
+  const messages = await res.json();
+  const list = document.getElementById('messages-list');
+  if (messages.length === 0) {
+    list.innerHTML = '<p style="color:var(--text-light);font-size:0.85rem;">Zatím žádné zprávy.</p>';
+    return;
+  }
+  list.innerHTML = messages.map(m => `
+    <div class="review-admin-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;">
+        <div>
+          <div class="review-author">${esc(m.name)}</div>
+          <div class="review-detail"><a href="mailto:${esc(m.email)}" style="color:var(--accent);">${esc(m.email)}</a>${m.service ? ' &middot; ' + esc(m.service) : ''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="review-detail">${new Date(m.createdAt).toLocaleDateString('cs-CZ')} ${new Date(m.createdAt).toLocaleTimeString('cs-CZ', {hour:'2-digit',minute:'2-digit'})}</span>
+          ${m.emailSent ? '<span style="color:var(--accent);font-size:0.7rem;">E-MAIL ODESLÁN</span>' : '<span style="color:var(--gold);font-size:0.7rem;">ULOŽENO</span>'}
+          <button class="btn btn-danger" onclick="deleteMessage('${m.id}')">Smazat</button>
+        </div>
+      </div>
+      <div class="review-text" style="font-style:normal;">${esc(m.message)}</div>
+    </div>
+  `).join('');
+}
+
+async function deleteMessage(id) {
+  if (!confirm('Smazat tuto zprávu?')) return;
+  try {
+    await api('/api/messages/' + id, { method: 'DELETE' });
+    toast('Zpráva smazána');
+    loadMessages();
+  } catch (e) {
+    toast('Chyba při mazání', true);
+  }
 }
 
 // ========== GALLERY ==========
@@ -298,6 +338,8 @@ async function loadSettings() {
   document.getElementById('set-phone').value = s.phone || '';
   document.getElementById('set-instagram').value = s.instagram || '';
   document.getElementById('set-instagram-url').value = s.instagramUrl || '';
+  document.getElementById('set-contact-email').value = s.contactEmail || '';
+  document.getElementById('set-analytics-id').value = s.analyticsId || '';
 }
 
 async function saveSettings() {
@@ -305,7 +347,9 @@ async function saveSettings() {
     email: document.getElementById('set-email').value,
     phone: document.getElementById('set-phone').value,
     instagram: document.getElementById('set-instagram').value,
-    instagramUrl: document.getElementById('set-instagram-url').value
+    instagramUrl: document.getElementById('set-instagram-url').value,
+    contactEmail: document.getElementById('set-contact-email').value,
+    analyticsId: document.getElementById('set-analytics-id').value
   };
   try {
     await api('/api/settings', {

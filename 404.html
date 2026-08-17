@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stránka nenalezena — Krasopis</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Krasopis</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Domů</a></li>
+        <li><a href="/sluzby">Služby</a></li>
+        <li><a href="/galerie">Galerie</a></li>
+        <li><a href="/o-mne">O mně</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-header" style="min-height:60vh;display:flex;align-items:center;">
+    <div class="container" style="text-align:center;">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--color-accent-light);margin-bottom:2rem;">
+        <path d="M30 55 Q28 40 30 25 Q32 12 28 5" stroke-linecap="round"/>
+        <path d="M30 45 Q15 38 8 30" stroke-linecap="round"/>
+        <path d="M30 40 Q42 32 50 25" stroke-linecap="round"/>
+        <ellipse cx="8" cy="28" rx="5" ry="8" transform="rotate(-25 8 28)" stroke-width="0.8"/>
+        <ellipse cx="50" cy="23" rx="5" ry="8" transform="rotate(25 50 23)" stroke-width="0.8"/>
+      </svg>
+      <p class="script-title" style="font-family:var(--font-script);font-size:3rem;color:var(--color-accent);margin-bottom:0.5rem;">404</p>
+      <h1 style="font-family:var(--font-heading);font-size:0.85rem;font-weight:400;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-text-light);margin-bottom:2rem;">Stránka nenalezena</h1>
+      <p style="color:var(--color-text-light);font-size:0.95rem;max-width:400px;margin:0 auto 2.5rem;">Omlouváme se, ale stránka, kterou hledáte, neexistuje nebo byla přesunuta.</p>
+      <a href="/" class="btn btn-filled">Zpět na úvodní stránku</a>
+    </div>
+  </header>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>&copy; 2026 Krasopis. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+  </script>
+
+</body>
+</html>

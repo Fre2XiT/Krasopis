@@ -5,29 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Krasopis — Kaligrafické služby</title>
   <meta name="description" content="Ruční kaligrafie pro vaše výjimečné okamžiky. Svatební pozvánky, jmenovky, obálky a další.">
+  <meta name="author" content="Krasopis">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:title" content="Krasopis — Kaligrafické služby">
+  <meta property="og:description" content="Ruční kaligrafie pro vaše výjimečné okamžiky. Svatební pozvánky, jmenovky, obálky a další.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/og-image.png">
+  <meta property="og:locale" content="cs_CZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Krasopis — Kaligrafické služby">
+  <meta name="twitter:description" content="Ruční kaligrafie pro vaše výjimečné okamžiky. Svatební pozvánky, jmenovky, obálky a další.">
+  <meta name="twitter:image" content="/images/og-image.png">
+  <link rel="canonical" href="/">
   <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Krasopis",
+    "description": "Ruční kaligrafie pro vaše výjimečné okamžiky. Svatební pozvánky, jmenovky, obálky a další.",
+    "image": "/images/og-image.png",
+    "@id": "#krasopis",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CZ"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Svatební pozvánky",
+          "description": "Ručně psané kaligrafické pozvánky na svatbu"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Jmenovky ke stolu",
+          "description": "Elegantní kaligrafické jmenovky"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Citáty a věnování",
+          "description": "Kaligraficky ztvárněné citáty a osobní věnování"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Přeskočit na obsah</a>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Krasopis</a>
+      <a href="/" class="nav-logo">Krasopis</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="active">Domů</a></li>
-        <li><a href="sluzby.html">Služby</a></li>
-        <li><a href="galerie.html">Galerie</a></li>
-        <li><a href="o-mne.html">O mně</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="/" class="active">Domů</a></li>
+        <li><a href="/sluzby">Služby</a></li>
+        <li><a href="/galerie">Galerie</a></li>
+        <li><a href="/o-mne">O mně</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="main">
     <svg class="hero-botanical-left" style="position:absolute;left:5%;top:20%;opacity:0.12;" width="120" height="300" viewBox="0 0 120 300" fill="none" stroke="currentColor" stroke-width="1">
       <path d="M60 280 Q58 200 60 120 Q62 60 55 20" stroke-linecap="round"/>
       <path d="M60 240 Q30 220 15 200" stroke-linecap="round"/>
@@ -74,7 +129,7 @@
         <span class="line"></span>
       </div>
       <p>Ruční kaligrafie pro vaše výjimečné okamžiky. Každé slovo je psáno s láskou a péčí, aby váš den byl dokonalý.</p>
-      <a href="sluzby.html" class="btn">Prohlédnout služby</a>
+      <a href="/sluzby" class="btn">Prohlédnout služby</a>
     </div>
   </section>
 
@@ -88,7 +143,7 @@
       </div>
       <div class="services-grid" id="services-grid"></div>
       <div style="text-align:center;margin-top:3rem;" class="fade-in">
-        <a href="sluzby.html" class="btn">Všechny služby</a>
+        <a href="/sluzby" class="btn">Všechny služby</a>
       </div>
     </div>
   </section>
@@ -127,7 +182,7 @@
       <div class="fade-in">
         <p class="hero-script" style="margin-bottom:1rem;">Pojďme tvořit společně</p>
         <p style="max-width:500px;margin:0 auto 2rem;color:var(--color-text-light);font-size:0.95rem;">Máte zájem o kaligrafii pro vaši událost? Neváhejte se ozvat — ráda vám připravím nezávaznou nabídku.</p>
-        <a href="kontakt.html" class="btn btn-filled">Napište mi</a>
+        <a href="/kontakt" class="btn btn-filled">Napište mi</a>
       </div>
     </div>
   </section>
@@ -143,11 +198,11 @@
         <div>
           <h4>Navigace</h4>
           <ul class="footer-links">
-            <li><a href="index.html">Domů</a></li>
-            <li><a href="sluzby.html">Služby</a></li>
-            <li><a href="galerie.html">Galerie</a></li>
-            <li><a href="o-mne.html">O mně</a></li>
-            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/sluzby">Služby</a></li>
+            <li><a href="/galerie">Galerie</a></li>
+            <li><a href="/o-mne">O mně</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
           </ul>
         </div>
         <div>
@@ -217,6 +272,7 @@
       `;
     });
   </script>
+  <script src="js/cookies.js"></script>
 
 </body>
 </html>
