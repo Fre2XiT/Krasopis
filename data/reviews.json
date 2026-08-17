@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "text": "Pozvánky na naši svatbu byly naprosto dokonalé. Všichni hosté byli nadšení a ptali se, kde jsme je nechali vyrobit. Děkujeme za krásnou práci!",
+    "author": "Lucie a Martin",
+    "detail": "Svatba, červen 2026",
+    "stars": 5
+  },
+  {
+    "id": "2",
+    "text": "Objednala jsem si kaligrafický citát jako dárek pro maminku. Bylo to tak krásné, že jsem si ho skoro nechala. Profesionální přístup a nádherný výsledek.",
+    "author": "Petra N.",
+    "detail": "Citát na přání, březen 2026",
+    "stars": 5
+  },
+  {
+    "id": "3",
+    "text": "Jmenovky ke stolu na firemní akci vypadaly luxusně. Ocenili jsme rychlou komunikaci a precizní provedení. Určitě se obrátíme znovu.",
+    "author": "Firma Elegance s.r.o.",
+    "detail": "Firemní akce, únor 2026",
+    "stars": 5
+  }
+]

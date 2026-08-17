@@ -108,29 +108,7 @@
         <p class="script-title">Recenze</p>
         <h2>Co říkají moji klienti</h2>
       </div>
-      <div class="reviews-grid">
-        <div class="review-card fade-in">
-          <div class="quote-mark">&ldquo;</div>
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>Pozvánky na naši svatbu byly naprosto dokonalé. Všichni hosté byli nadšení a ptali se, kde jsme je nechali vyrobit. Děkujeme za krásnou práci!</p>
-          <p class="reviewer">Lucie a Martin</p>
-          <p class="reviewer-detail">Svatba, červen 2026</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="quote-mark">&ldquo;</div>
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>Objednala jsem si kaligrafický citát jako dárek pro maminku. Bylo to tak krásné, že jsem si ho skoro nechala. Profesionální přístup a nádherný výsledek.</p>
-          <p class="reviewer">Petra N.</p>
-          <p class="reviewer-detail">Citát na přání, březen 2026</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="quote-mark">&ldquo;</div>
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>Jmenovky ke stolu na firemní akci vypadaly luxusně. Ocenili jsme rychlou komunikaci a precizní provedení. Určitě se obrátíme znovu.</p>
-          <p class="reviewer">Firma Elegance s.r.o.</p>
-          <p class="reviewer-detail">Firemní akce, únor 2026</p>
-        </div>
-      </div>
+      <div class="reviews-grid" id="reviews-grid"></div>
     </div>
   </section>
 
@@ -165,7 +143,7 @@
         </div>
         <div>
           <h4>Kontakt</h4>
-          <ul class="footer-links">
+          <ul class="footer-links" id="footer-contact">
             <li><a href="mailto:info@krasopis.cz">info@krasopis.cz</a></li>
             <li><a href="tel:+420000000000">+420 000 000 000</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
@@ -184,6 +162,29 @@
     document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
     const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    fetch('/api/reviews').then(r => r.json()).then(reviews => {
+      const grid = document.getElementById('reviews-grid');
+      grid.innerHTML = reviews.map(r => `
+        <div class="review-card fade-in">
+          <div class="quote-mark">&ldquo;</div>
+          <div class="review-stars">${'&#9733;'.repeat(r.stars)}</div>
+          <p>${r.text}</p>
+          <p class="reviewer">${r.author}</p>
+          <p class="reviewer-detail">${r.detail}</p>
+        </div>
+      `).join('');
+      grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+
+    fetch('/api/settings').then(r => r.json()).then(s => {
+      const c = document.getElementById('footer-contact');
+      if (c) c.innerHTML = `
+        <li><a href="mailto:${s.email}">${s.email}</a></li>
+        <li><a href="tel:${s.phone.replace(/\s/g,'')}">${s.phone}</a></li>
+        <li><a href="${s.instagramUrl}" target="_blank" rel="noopener">Instagram</a></li>
+      `;
+    });
   </script>
 
 </body>

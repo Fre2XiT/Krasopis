@@ -47,13 +47,13 @@
               <rect x="2" y="4" width="16" height="12" rx="1"/>
               <path d="M2 6 L10 12 L18 6" stroke-linecap="round"/>
             </svg>
-            <span>info@krasopis.cz</span>
+            <span id="contact-email">info@krasopis.cz</span>
           </div>
           <div class="contact-detail">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
               <path d="M3 4 L7 4 L9 8 L7 10 Q9 14 11 13 Q13 12 14 11 L16 13 L16 17 Q8 18 3 4Z" stroke-linecap="round"/>
             </svg>
-            <span>+420 000 000 000</span>
+            <span id="contact-phone">+420 000 000 000</span>
           </div>
           <div class="contact-detail">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -61,7 +61,7 @@
               <circle cx="10" cy="10" r="4"/>
               <circle cx="14.5" cy="5.5" r="1" fill="currentColor"/>
             </svg>
-            <span>@krasopis</span>
+            <a id="contact-instagram" href="https://instagram.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">@krasopis</a>
           </div>
 
           <div style="margin-top:2rem;">
@@ -128,7 +128,7 @@
         </div>
         <div>
           <h4>Kontakt</h4>
-          <ul class="footer-links">
+          <ul class="footer-links" id="footer-contact">
             <li><a href="mailto:info@krasopis.cz">info@krasopis.cz</a></li>
             <li><a href="tel:+420000000000">+420 000 000 000</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
@@ -161,6 +161,27 @@
         e.target.reset();
       }, 3000);
     }
+
+    fetch('/api/settings').then(r => r.json()).then(s => {
+      document.getElementById('contact-email').textContent = s.email;
+      document.getElementById('contact-phone').textContent = s.phone;
+      const ig = document.getElementById('contact-instagram');
+      ig.textContent = s.instagram;
+      ig.href = s.instagramUrl;
+      const c = document.getElementById('footer-contact');
+      if (c) c.innerHTML = `
+        <li><a href="mailto:${s.email}">${s.email}</a></li>
+        <li><a href="tel:${s.phone.replace(/\s/g,'')}">${s.phone}</a></li>
+        <li><a href="${s.instagramUrl}" target="_blank" rel="noopener">Instagram</a></li>
+      `;
+    });
+
+    fetch('/api/services').then(r => r.json()).then(services => {
+      const sel = document.getElementById('service');
+      sel.innerHTML = '<option value="">Vyberte službu...</option>' +
+        services.map(s => `<option value="${s.title}">${s.title}</option>`).join('') +
+        '<option value="jine">Jiné</option>';
+    });
   </script>
 
 </body>

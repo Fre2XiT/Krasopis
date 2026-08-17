@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krasopis — Administrace</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-box">
+      <h1>Krasopis</h1>
+      <p>Administrace webu</p>
+      <div id="login-error" class="login-error"></div>
+      <input type="password" id="login-password" placeholder="Heslo">
+      <button id="login-btn">Přihlásit se</button>
+    </div>
+  </div>
+
+  <!-- Admin -->
+  <div class="admin-layout">
+    <header class="admin-header">
+      <h1>Krasopis <span>Administrace</span></h1>
+      <button class="btn-logout" onclick="logout()">Odhlásit se</button>
+    </header>
+
+    <nav class="admin-tabs">
+      <button class="tab-btn active" data-tab="gallery">Galerie</button>
+      <button class="tab-btn" data-tab="services">Služby</button>
+      <button class="tab-btn" data-tab="reviews">Recenze</button>
+      <button class="tab-btn" data-tab="settings">Nastavení</button>
+    </nav>
+
+    <main class="admin-content">
+
+      <!-- Gallery -->
+      <div id="panel-gallery" class="tab-panel active">
+        <div class="panel-header">
+          <h2>Galerie</h2>
+        </div>
+        <div id="upload-zone" class="upload-zone">
+          <p>Přetáhněte fotku sem nebo klikněte pro nahrání</p>
+          <input type="file" id="upload-input" accept="image/jpeg,image/png,image/webp,image/gif">
+        </div>
+        <div id="gallery-grid" class="gallery-admin-grid"></div>
+      </div>
+
+      <!-- Services -->
+      <div id="panel-services" class="tab-panel">
+        <div class="panel-header">
+          <h2>Služby</h2>
+          <div style="display:flex;gap:0.5rem;">
+            <button class="btn btn-outline btn-sm" onclick="addService()">Přidat službu</button>
+            <button class="btn btn-sm" onclick="saveServices()">Uložit změny</button>
+          </div>
+        </div>
+        <div id="services-list"></div>
+      </div>
+
+      <!-- Reviews -->
+      <div id="panel-reviews" class="tab-panel">
+        <div class="panel-header">
+          <h2>Recenze</h2>
+          <button class="btn btn-sm" onclick="openReviewModal()">Přidat recenzi</button>
+        </div>
+        <div id="reviews-list"></div>
+      </div>
+
+      <!-- Settings -->
+      <div id="panel-settings" class="tab-panel">
+        <div class="panel-header">
+          <h2>Nastavení</h2>
+        </div>
+        <div class="settings-card">
+          <h3>Kontaktní údaje</h3>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="set-email">
+          </div>
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="text" id="set-phone">
+          </div>
+          <div class="form-group">
+            <label>Instagram</label>
+            <input type="text" id="set-instagram">
+          </div>
+          <div class="form-group">
+            <label>Instagram URL</label>
+            <input type="url" id="set-instagram-url">
+          </div>
+          <button class="btn" onclick="saveSettings()">Uložit kontakt</button>
+
+          <hr class="divider">
+
+          <h3>Změna hesla</h3>
+          <div class="form-group">
+            <label>Aktuální heslo</label>
+            <input type="password" id="pw-current">
+          </div>
+          <div class="form-group">
+            <label>Nové heslo</label>
+            <input type="password" id="pw-new">
+          </div>
+          <button class="btn" onclick="changePassword()">Změnit heslo</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="review-modal" class="modal-overlay">
+    <div class="modal">
+      <h3>Nová recenze</h3>
+      <div class="form-group">
+        <label>Text recenze</label>
+        <textarea id="review-text" rows="4"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Autor</label>
+          <input type="text" id="review-author">
+        </div>
+        <div class="form-group">
+          <label>Detail (např. Svatba, 2026)</label>
+          <input type="text" id="review-detail">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Hodnocení</label>
+        <select id="review-stars">
+          <option value="5">5 hvězd</option>
+          <option value="4">4 hvězdy</option>
+          <option value="3">3 hvězdy</option>
+          <option value="2">2 hvězdy</option>
+          <option value="1">1 hvězda</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeReviewModal()">Zrušit</button>
+        <button class="btn" onclick="saveReview()">Uložit</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

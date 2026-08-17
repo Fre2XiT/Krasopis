@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "Svatební pozvánky",
+    "description": "Ručně psané pozvánky, které nastaví tón celé vaší svatby. Nabízím různé styly písma od klasické copperplate kaligrafie po moderní brush lettering.",
+    "price": "od 45 Kč / ks",
+    "icon": "envelope"
+  },
+  {
+    "id": "2",
+    "title": "Jmenovky ke stolu",
+    "description": "Elegantní jmenovky, které dodají vaší hostině osobní a ušlechtilý nádech. K dispozici na různých typech papíru a kartonu.",
+    "price": "od 25 Kč / ks",
+    "icon": "card"
+  },
+  {
+    "id": "3",
+    "title": "Adresování obálek",
+    "description": "Krásně popsané obálky s adresami hostů. První dojem začíná už v poštovní schránce.",
+    "price": "od 35 Kč / ks",
+    "icon": "mail"
+  },
+  {
+    "id": "4",
+    "title": "Citáty a věnování",
+    "description": "Kaligraficky ztvárněné citáty, básně nebo osobní věnování. Ideální jako dárek nebo dekorace do interiéru.",
+    "price": "od 250 Kč",
+    "icon": "quote"
+  },
+  {
+    "id": "5",
+    "title": "Diplomy a certifikáty",
+    "description": "Slavnostní kaligrafické popisy diplomů, certifikátů a ocenění pro firemní i soukromé účely.",
+    "price": "od 350 Kč",
+    "icon": "diploma"
+  },
+  {
+    "id": "6",
+    "title": "Menu a programy",
+    "description": "Kaligraficky psaná svatební menu, programy obřadu nebo jiných událostí. Sladíme s celkovým vizuálem.",
+    "price": "od 150 Kč / ks",
+    "icon": "menu"
+  }
+]
