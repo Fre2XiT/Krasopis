@@ -339,6 +339,7 @@ async function loadSettings() {
   document.getElementById('set-instagram').value = s.instagram || '';
   document.getElementById('set-instagram-url').value = s.instagramUrl || '';
   document.getElementById('set-contact-email').value = s.contactEmail || '';
+  document.getElementById('set-analytics-id').value = s.analyticsId || '';
 }
 
 async function saveSettings() {
@@ -347,7 +348,8 @@ async function saveSettings() {
     phone: document.getElementById('set-phone').value,
     instagram: document.getElementById('set-instagram').value,
     instagramUrl: document.getElementById('set-instagram-url').value,
-    contactEmail: document.getElementById('set-contact-email').value
+    contactEmail: document.getElementById('set-contact-email').value,
+    analyticsId: document.getElementById('set-analytics-id').value
   };
   try {
     await api('/api/settings', {
