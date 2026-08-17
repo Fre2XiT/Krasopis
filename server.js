@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 
@@ -168,6 +169,92 @@ app.put('/api/settings', requireAuth, (req, res) => {
   const settings = req.body;
   writeJSON('settings.json', settings);
   res.json(settings);
+});
+
+// --- Contact form ---
+
+const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+if (!fs.existsSync(MESSAGES_FILE)) writeJSON('messages.json', []);
+
+function getTransporter() {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !user || !pass) return null;
+  return nodemailer.createTransport({
+    host,
+    port: parseInt(process.env.SMTP_PORT) || 587,
+    secure: (process.env.SMTP_PORT || '587') === '465',
+    auth: { user, pass }
+  });
+}
+
+app.post('/api/contact', async (req, res) => {
+  const { name, email, service, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Vyplňte jméno, e-mail a zprávu' });
+  }
+
+  const msg = {
+    id: genId(),
+    name,
+    email,
+    service: service || '',
+    message,
+    createdAt: new Date().toISOString(),
+    emailSent: false
+  };
+
+  const messages = readJSON('messages.json');
+  messages.unshift(msg);
+  writeJSON('messages.json', messages);
+
+  const settings = readJSON('settings.json');
+  const transporter = getTransporter();
+
+  if (transporter && settings.contactEmail) {
+    try {
+      await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        replyTo: email,
+        to: settings.contactEmail,
+        subject: `Krasopis — poptávka od ${name}`,
+        text: [
+          `Jméno: ${name}`,
+          `E-mail: ${email}`,
+          service ? `Služba: ${service}` : '',
+          '',
+          message
+        ].filter(Boolean).join('\n'),
+        html: `
+          <h3>Nová poptávka z webu Krasopis</h3>
+          <p><strong>Jméno:</strong> ${name}</p>
+          <p><strong>E-mail:</strong> <a href="mailto:${email}">${email}</a></p>
+          ${service ? `<p><strong>Služba:</strong> ${service}</p>` : ''}
+          <hr>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        `
+      });
+      msg.emailSent = true;
+      messages[0].emailSent = true;
+      writeJSON('messages.json', messages);
+    } catch (e) {
+      console.error('Chyba při odesílání e-mailu:', e.message);
+    }
+  }
+
+  res.json({ message: 'Zpráva odeslána', emailSent: msg.emailSent });
+});
+
+app.get('/api/messages', requireAuth, (req, res) => {
+  res.json(readJSON('messages.json'));
+});
+
+app.delete('/api/messages/:id', requireAuth, (req, res) => {
+  let messages = readJSON('messages.json');
+  messages = messages.filter(m => m.id !== req.params.id);
+  writeJSON('messages.json', messages);
+  res.json({ message: 'Smazáno' });
 });
 
 // --- Admin SPA ---

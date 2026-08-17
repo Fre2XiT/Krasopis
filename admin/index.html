@@ -27,7 +27,8 @@
     </header>
 
     <nav class="admin-tabs">
-      <button class="tab-btn active" data-tab="gallery">Galerie</button>
+      <button class="tab-btn active" data-tab="messages">Zprávy</button>
+      <button class="tab-btn" data-tab="gallery">Galerie</button>
       <button class="tab-btn" data-tab="services">Služby</button>
       <button class="tab-btn" data-tab="reviews">Recenze</button>
       <button class="tab-btn" data-tab="settings">Nastavení</button>
@@ -35,8 +36,16 @@
 
     <main class="admin-content">
 
+      <!-- Messages -->
+      <div id="panel-messages" class="tab-panel active">
+        <div class="panel-header">
+          <h2>Zprávy z formuláře</h2>
+        </div>
+        <div id="messages-list"></div>
+      </div>
+
       <!-- Gallery -->
-      <div id="panel-gallery" class="tab-panel active">
+      <div id="panel-gallery" class="tab-panel">
         <div class="panel-header">
           <h2>Galerie</h2>
         </div>
@@ -90,6 +99,14 @@
           <div class="form-group">
             <label>Instagram URL</label>
             <input type="url" id="set-instagram-url">
+          </div>
+
+          <hr class="divider">
+
+          <h3>E-mail pro poptávky</h3>
+          <div class="form-group">
+            <label>Kam posílat zprávy z formuláře</label>
+            <input type="email" id="set-contact-email">
           </div>
           <button class="btn" onclick="saveSettings()">Uložit kontakt</button>
 

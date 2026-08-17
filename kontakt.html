@@ -148,18 +148,43 @@
     const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Odesláno!';
-      btn.style.background = 'var(--color-gold)';
-      btn.style.borderColor = 'var(--color-gold)';
-      setTimeout(() => {
-        btn.textContent = 'Odeslat poptávku';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        e.target.reset();
-      }, 3000);
+      btn.disabled = true;
+      btn.textContent = 'Odesílám...';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            service: document.getElementById('service').value,
+            message: document.getElementById('message').value
+          })
+        });
+        if (!res.ok) throw new Error();
+        btn.textContent = 'Odesláno!';
+        btn.style.background = 'var(--color-gold)';
+        btn.style.borderColor = 'var(--color-gold)';
+        setTimeout(() => {
+          btn.textContent = 'Odeslat poptávku';
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.disabled = false;
+          e.target.reset();
+        }, 3000);
+      } catch (err) {
+        btn.textContent = 'Chyba při odesílání';
+        btn.style.background = 'var(--color-danger, #C45D5D)';
+        setTimeout(() => {
+          btn.textContent = 'Odeslat poptávku';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     }
 
     fetch('/api/settings').then(r => r.json()).then(s => {
