@@ -10,7 +10,25 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+  if (req.method === 'GET' && req.path.endsWith('.html') && !req.path.startsWith('/admin')) {
+    const clean = req.path === '/index.html' ? '/' : req.path.slice(0, -5);
+    return res.redirect(301, clean);
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname)));
+
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.includes('.') && req.path !== '/') {
+    const filePath = path.join(__dirname, req.path + '.html');
+    if (!filePath.startsWith(__dirname)) return next();
+    if (fs.existsSync(filePath)) return res.sendFile(filePath);
+  }
+  next();
+});
 
 const DATA_DIR = path.join(__dirname, 'data');
 const UPLOAD_DIR = path.join(__dirname, 'images', 'uploads');
