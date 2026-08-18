@@ -57,8 +57,28 @@
     </div>
   </section>
 
-  <!-- Pricing Note -->
+  <!-- Font Showcase -->
   <section class="section section-alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="script-title">Písma</p>
+        <h2>Vyberte si styl písma</h2>
+        <p>Prohlédněte si ukázky písem, ze kterých si můžete vybrat. Každé písmo dodá vašemu textu jedinečný charakter.</p>
+      </div>
+      <div class="fonts-grid" id="fonts-grid"></div>
+      <div class="fonts-custom fade-in">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M8 32 L28 12 L32 16 L12 36 L6 38 L8 32Z" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M26 14 L30 18" stroke-linecap="round"/>
+          <path d="M30 10 Q32 6 36 8" stroke-linecap="round" stroke-width="0.8"/>
+        </svg>
+        <p>Máte vlastní představu o písmu? Přiložte k poptávce odkaz na písmo nebo obrázek stylu, který se vám líbí, a já se ho pokusím co nejvěrněji napodobit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Note -->
+  <section class="section">
     <div class="container" style="text-align:center;max-width:600px;">
       <div class="fade-in">
         <p class="hero-script" style="font-size:2rem;margin-bottom:1rem;">Cenová nabídka</p>
@@ -107,6 +127,7 @@
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
     document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
     const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     const serviceIcons = {
       envelope: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="6" y="8" width="36" height="32" rx="1"/><path d="M6 16 L24 28 L42 16" stroke-linecap="round"/><path d="M18 12 Q24 4 30 12" stroke-linecap="round" stroke-width="0.8"/></svg>',
@@ -117,6 +138,36 @@
       menu: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 40 L8 12 Q8 8 12 8 L36 8 Q40 8 40 12 L40 40" stroke-linecap="round"/><path d="M8 40 L40 40" stroke-linecap="round"/><path d="M16 18 L32 18" stroke-linecap="round" stroke-width="0.8"/><path d="M16 24 L28 24" stroke-linecap="round" stroke-width="0.8"/><path d="M16 30 L24 30" stroke-linecap="round" stroke-width="0.8"/></svg>'
     };
     const defaultIcon = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="4" width="32" height="40" rx="1"/><path d="M16 16 L32 16" stroke-linecap="round" stroke-width="0.8"/><path d="M16 22 L28 22" stroke-linecap="round" stroke-width="0.8"/></svg>';
+
+    const fontsList = [
+      { name: 'Great Vibes', family: "'Great Vibes', cursive", label: 'Klasická kaligrafie', style: '' },
+      { name: 'Dancing Script', family: "'Dancing Script', cursive", label: 'Elegantní kurzíva', style: '' },
+      { name: 'Pacifico', family: "'Pacifico', cursive", label: 'Hravý skript', style: '' },
+      { name: 'Sacramento', family: "'Sacramento', cursive", label: 'Moderní kaligrafie', style: '' },
+      { name: 'Allura', family: "'Allura', cursive", label: 'Formální skript', style: '' },
+      { name: 'Pinyon Script', family: "'Pinyon Script', cursive", label: 'Tradiční kaligrafie', style: '' },
+      { name: 'Satisfy', family: "'Satisfy', cursive", label: 'Neformální kurzíva', style: '' },
+      { name: 'Cormorant Garamond', family: "'Cormorant Garamond', serif", label: 'Elegantní serif', style: 'font-style:italic;' },
+      { name: 'Libre Baskerville', family: "'Libre Baskerville', serif", label: 'Klasický serif', style: 'font-style:italic;' },
+      { name: 'Amatic SC', family: "'Amatic SC', cursive", label: 'Moderní rukopis', style: '' }
+    ];
+    const upper = 'A Á B C Č D Ď E É Ě F G H I Í J K L M N Ň O Ó P Q R Ř S Š T Ť U Ú Ů V W X Y Ý Z Ž';
+    const lower = 'a á b c č d ď e é ě f g h i í j k l m n ň o ó p q r ř s š t ť u ú ů v w x y ý z ž';
+    const nums = '0 1 2 3 4 5 6 7 8 9';
+    const fontsGrid = document.getElementById('fonts-grid');
+    fontsGrid.innerHTML = fontsList.map(f => `
+      <div class="font-card fade-in">
+        <span class="font-card-label">${f.label}</span>
+        <h3 class="font-card-name" style="font-family:${f.family};${f.style}">${f.name}</h3>
+        <p class="font-card-sample" style="font-family:${f.family};${f.style}">Příliš žluťoučký kůň úpěl ďábelské ódy</p>
+        <p class="font-card-alphabet" style="font-family:${f.family};${f.style}">${upper}</p>
+        <p class="font-card-alphabet" style="font-family:${f.family};${f.style}">${lower}</p>
+        <p class="font-card-alphabet" style="font-family:${f.family};${f.style}">${nums}</p>
+      </div>
+    `).join('');
+    fontsGrid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelector('.fonts-custom')?.classList.add('fade-in');
+    document.querySelectorAll('.fonts-custom.fade-in').forEach(el => observer.observe(el));
 
     fetch('/api/services').then(r => r.json()).then(services => {
       const grid = document.getElementById('services-grid');
